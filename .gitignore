@@ -1,0 +1,61 @@
+# Files to ignore for eSubmission Benchmark
+
+# R
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+*.Rproj.user/
+*.RData
+*.Rhistory
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build artifacts
+*.html
+*.log
+*.tmp
+
+# Large files (optional - comment out if needed)
+# *.pdf
+# *.xpt
+
+# Validation outputs (generated)
+08_validation/validation_results*.csv
+08_validation/validation_summary.txt
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Package files
+*.tar.gz
+*.zip
+
+# R package build
+*.rds
+man/*.Rd
+NAMESPACE
+DESCRIPTION.lock
+
+# renv (if used)
+renv/library/
+renv/local/
+renv/cellular/
+renv/sandbox/

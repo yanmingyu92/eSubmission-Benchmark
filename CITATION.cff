@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite it as below."
+title: "eSubmission Benchmark: A Comprehensive Clinical Trial Regulatory Submission Package"
+version: 1.0.0
+doi: 10.5281/zenodo.XXXXXX
+date-released: 2026-02-12
+url: "https://github.com/your-org/esub-benchmark"
+authors:
+  - family-names: "Your Name"
+    given-names: "Author"
+    orcid: https://orcid.org/XXXX-XXXX-XXXX-XXXX
+repository-code: "https://github.com/your-org/esub-benchmark"
+keywords:
+  - clinical trial
+  - regulatory submission
+  - eSubmission
+  - CDISC
+  - SDTM
+  - ADaM
+  - FDA
+  - benchmark
+  - pharmaceutical
+license: CC-BY-4.0
+references:
+  - type: dataset
+    authors:
+      - name: "CDISC"
+    title: "CDISC SDTM/ADaM Pilot Project"
+    url: "https://github.com/cdisc-org/sdtm-adam-pilot-project"
+  - type: software
+    authors:
+      - name: "RConsortium Submissions Working Group"
+    title: "RConsortium FDA Submission Pilots"
+    url: "https://github.com/RConsortium/submissions-wg"
+  - type: software
+    authors:
+      - name: "Pharmaverse"
+    title: "pharmaverseraw - Raw Clinical Data Package"
+    url: "https://github.com/pharmaverse/pharmaverseraw"
+  - type: software
+    authors:
+      - name: "Pharmaverse"
+    title: "pharmaversesdtm - SDTM Test Data Package"
+    url: "https://github.com/pharmaverse/pharmaversesdtm"
