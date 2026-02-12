@@ -28,7 +28,7 @@ If you use this benchmark in your research, please cite:
   publisher={GitHub},
   version={1.0.0},
   doi={10.5281/zenodo.XXXXXX},
-  url={https://github.com/your-org/esub-benchmark}
+  url={https://github.com/yanmingyu92/esub-benchmark}
 }
 ```
 
