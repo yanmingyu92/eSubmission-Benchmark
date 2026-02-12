@@ -23,7 +23,7 @@ If you use this benchmark in your research, please cite:
 ```bibtex
 @dataset{esub_benchmark_2026,
   title={eSubmission Benchmark: A Comprehensive Clinical Trial Regulatory Submission Package},
-  author={Your Name},
+  author={Jaime Yan},
   year={2026},
   publisher={GitHub},
   version={1.0.0},
