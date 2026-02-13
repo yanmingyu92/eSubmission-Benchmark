@@ -1,36 +1,41 @@
 # Excel Specification Evaluation
 
-## Current State
+## Current State (Updated)
 
 ### Excel Specs We Have
 
-| File | Location | Type | Sheets |
-|------|----------|------|--------|
-| adam-pilot-3.xlsx | 05_adam/ | ADaM | 11 sheets (P21 format) |
-| pilot6-specs.xlsx | 05_adam/ | ADaM | Similar P21 format |
+| File | Location | Type | Records |
+|------|----------|------|---------|
+| SDTM_Specifications.xlsx | 04_sdtm/ | SDTM | 22 datasets, 539 variables, 388 codelists |
+| ADaM_Specifications.xlsx | 05_adam/ | ADaM | 12 datasets, 509 variables, 894 codelists |
 
-### Excel Specs Structure (adam-pilot-3.xlsx)
+### SDTM Excel Spec Structure (SDTM_Specifications.xlsx)
 
 | Sheet | Records | Purpose |
 |-------|---------|---------|
-| Define | 6 | Study metadata |
-| Datasets | 5 | Dataset specifications |
-| Variables | 216 | Variable specifications |
-| ValueLevel | 15 | Value-level metadata |
-| Codelists | 339 | Controlled terminology |
+| Define | 1 | Study metadata |
+| Datasets | 22 | SDTM domain specifications |
+| Variables | 539 | Variable specifications |
+| ValueLevel | 226 | Value-level metadata (LB, QS, VS) |
+| Codelists | 388 | Controlled terminology |
+| Methods | 2 | Derivation methods |
+| Comments | 0 | Documentation comments |
+
+### ADaM Excel Spec Structure (ADaM_Specifications.xlsx)
+
+| Sheet | Records | Purpose |
+|-------|---------|---------|
+| Define | 8 | Study metadata |
+| Datasets | 12 | ADaM dataset specifications |
+| Variables | 509 | Variable specifications |
+| ValueLevel | 108 | Value-level metadata |
+| Codelists | 894 | Controlled terminology |
 | Dictionaries | 1 | MedDRA reference |
-| Methods | 157 | Derivation methods |
-| Comments | 8 | Documentation comments |
-| Documents | 1 | Document references |
-| Analysis Displays | 0 | (Empty) |
-| Analysis Results | 0 | (Empty) |
-
-### Excel Specs We're Missing
-
-| Spec Type | Status | Priority |
-|-----------|--------|----------|
-| SDTM Specifications | ❌ Missing | HIGH |
-| Raw Data Specifications | ❌ Missing | MEDIUM |
+| Methods | 160 | Derivation methods |
+| Comments | 31 | Documentation comments |
+| Documents | 2 | Document references |
+| Analysis Displays | 2 | Analysis display metadata |
+| Analysis Results | 2 | Analysis result definitions |
 
 ---
 
@@ -48,114 +53,38 @@
 
 ---
 
-## Evaluation
+## Status Summary
 
-### Pros of Excel Specs
-
-| Advantage | Description |
-|-----------|-------------|
-| Industry Standard | P21 format is widely used |
-| Machine Readable | metacore R package can read directly |
-| Define.xml Generation | Can auto-generate define.xml |
-| Validation Support | P21 Enterprise validates against spec |
-| Traceability | Links variables to methods, codelists |
-| Working Document | Used throughout development |
-
-### Cons of Excel Specs
-
-| Disadvantage | Description |
-|--------------|-------------|
-| Version Control | Binary file, hard to diff in git |
-| Manual Updates | Must sync with actual data changes |
-| Multiple Files | SDTM + ADaM = multiple Excel files |
-
-### Current Gap Analysis
-
-| Component | MD Spec | Excel Spec | Gap |
-|-----------|---------|------------|-----|
-| SDTM | ✅ SDRG + Specs MD | ❌ Missing | **Need to create** |
-| ADaM | ✅ Specs MD + ADRG | ✅ adam-pilot-3.xlsx | Complete |
-| Raw Data | ✅ Documentation MD | ❌ N/A (not required) | N/A |
+| Component | MD Spec | Excel Spec | Status |
+|-----------|---------|------------|--------|
+| SDTM | SDRG + Specs MD | SDTM_Specifications.xlsx | Complete |
+| ADaM | Specs MD + ADRG | ADaM_Specifications.xlsx | Complete |
+| Raw Data | Documentation MD | N/A (not required) | N/A |
 
 ---
 
-## Recommendation
+## Implementation Notes
 
-### Decision: **YES, Create SDTM Excel Spec**
+### SDTM Excel Spec Creation
+- Generated from `define.xml` using R script (`04_sdtm/create_sdtm_spec.R`)
+- Parses CDISC ODM XML format
+- Extracts all ItemGroupDef (datasets), ItemDef (variables), CodeList, and ComputationMethod elements
 
-**Rationale:**
-1. **Complete Package** - Benchmark should include both SDTM and ADaM Excel specs
-2. **Industry Standard** - P21 format is the de facto standard
-3. **Practical Use** - Developers need Excel specs for metacore workflow
-4. **Already Have Template** - adam-pilot-3.xlsx is a template
-
-### Options to Create SDTM Excel Spec
-
-#### Option A: Extract from define.xml (Recommended)
-- Parse define.xml to extract metadata
-- Generate Excel using metacore/xlsx packages
-- Ensures consistency with actual define.xml
-
-#### Option B: Use P21 Template
-- Download P21 template
-- Fill with our SDTM domain information
-- Manual but straightforward
-
-#### Option C: Copy from Reference Repo
-- Find existing SDTM spec in reference repos
-- Adapt to our needs
-
----
-
-## Implementation Plan
-
-### Step 1: Check for Existing SDTM Excel Specs
-
-Search reference repos for any SDTM spec Excel files
-
-### Step 2: Create SDTM Excel Spec
-
-Use the P21 format with these sheets:
-- Datasets (22 SDTM domains)
-- Variables (all SDTM variables)
-- ValueLevel (for LB, VS, QS)
-- Codelists (controlled terms)
-- Methods (derivations)
-
-### Step 3: Validate
-
-- Compare with define.xml
-- Verify all domains/variables included
-- Test with metacore package
-
----
-
-## Proposed SDTM Excel Spec Content
-
-### Datasets Sheet (22 domains)
-
-| Dataset | Label | Class | Structure |
-|---------|-------|-------|-----------|
-| DM | Demographics | Special Purpose | One per subject |
-| AE | Adverse Events | Events | One per AE per subject |
-| CM | Con Meds | Interventions | One per CM per subject |
-| ... | ... | ... | ... |
-
-### Estimated Records
-
-| Sheet | Est. Records |
-|-------|-------------|
-| Datasets | 22 |
-| Variables | ~400 |
-| ValueLevel | ~50 |
-| Codelists | ~200 |
-| Methods | ~50 |
+### ADaM Excel Spec Merge
+- Merged from `pilot6-specs.xlsx` (more complete than `adam-pilot-3.xlsx`)
+- Contains all 5 datasets from original plus 7 additional datasets
+- Includes Analysis Results Catalog (ARC) metadata
 
 ---
 
 ## Conclusion
 
-**We SHOULD create an SDTM Excel specification** to have a complete, industry-standard benchmark package. The ADaM Excel spec (adam-pilot-3.xlsx) already exists and follows P21 format. Creating the SDTM counterpart will make the benchmark more complete and useful for:
+**All Excel specifications are now complete.** The benchmark package includes:
+1. **SDTM Excel Spec** - 22 domains, 539 variables, P21 format
+2. **ADaM Excel Spec** - 12 datasets, 509 variables, P21 format with ARC support
+
+These specs are useful for:
 1. Developers learning CDISC standards
-2. Testing tools that use Excel specs
+2. Testing tools that use Excel specs (metacore, P21)
 3. Demonstrating complete submission workflow
+4. Generating define.xml files
